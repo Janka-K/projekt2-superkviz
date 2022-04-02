@@ -18,13 +18,20 @@ secondQuestion = {
     index: 1
 };
 
+thirdQuestion = {
+    question: 'Pro uspesne absolvovani kurzu je potreba... ',
+    picture: 'obrazky/pivo.jpg',
+    answers: ['Umet JavaScript','Chodit po kurzu do hospody'],
+    index: 0
+};
 
-pole = [firstQuestion,secondQuestion];
+pole = [firstQuestion,secondQuestion,thirdQuestion];
 
-
-
+x = -1;
 
 function prvniStranka(){
+    x = x + 1;
+    
     let page = document.createElement('div');
     page.className = 'kviz';
 
@@ -36,7 +43,7 @@ function prvniStranka(){
     page.appendChild(questionCount);
 
     questionInformation = document.createElement('h2');
-    questionInformation.innerHTML = 'Otazka ' + firstQuestion.index + ' / ' + '3';
+    questionInformation.innerHTML = 'Otazka ' + (x + 1) + ' / ' + '3';
     questionCount.appendChild(questionInformation);
 
     let question = document.createElement('div');
@@ -44,7 +51,7 @@ function prvniStranka(){
     page.appendChild(question);
 
     let questionContent = document.createElement('h3');
-    questionContent.innerHTML = firstQuestion.question;
+    questionContent.innerHTML = pole[x].question;
     question.appendChild(questionContent);
 
     let content = document.createElement('div');
@@ -56,7 +63,7 @@ function prvniStranka(){
 
     let picture = document.createElement('img');
     picture.id = 'obrazek';
-    picture.src = firstQuestion.picture;
+    picture.src = pole[x].picture;
     fotka.appendChild(picture);
 
     let list = document.createElement('div');
@@ -68,21 +75,21 @@ function prvniStranka(){
     list.appendChild(listItems);
 
 
-    for(let i = 0; i < firstQuestion.answers.length; i++){
+    for(let i = 0; i < pole[x].answers.length; i++){
         let innerQuestion = document.createElement('li');
-        innerQuestion.innerHTML = firstQuestion.answers[i];
+        innerQuestion.innerHTML = pole[x].answers[i];
         listItems.appendChild(innerQuestion);
     }
- 
 }
 
 
 function  odstran(){
-    let rodic = document.querySelector('.kviz');
-    let potomek1 = document.querySelector ('#poradi');
-    let potomek2 = document.querySelector ('#otazka');
-    let potomek3 = document.querySelector ('.obsah');
-    rodic.removeChild (potomek1);
-    rodic.removeChild (potomek2);
-    rodic.removeChild (potomek3);
+    let rodic = document.querySelector('body');
+    let potomek1 = document.querySelector('.kviz');
+   rodic.removeChild(potomek1);
+   prvniStranka();
+
 }
+
+// je potreba zajistit:
+// posledni stranku s vyhodnocenim vysledku
