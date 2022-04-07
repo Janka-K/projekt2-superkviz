@@ -5,31 +5,32 @@
 // * pole moznych odpovedi - a index spravne odpovedi
 
 firstQuestion = {
-    question: 'Co je ikonicka hracka z 80.let?',
+    question: 'Co je ikonická hračka z 80.let?',
     picture: 'obrazky/moncicak.jpg',
-    answers: ['Kocicak','Moncicak','Opicak'],
+    answers: ['Kočičák','Mončičák','Opičák'],
     index: 1
 };
 
 secondQuestion = {
-    question: 'Jake je Matejovo nejoblibenejsi ovoce ?',
+    question: 'Jaké je Matějovo nejoblíbenější ovoce?',
     picture: 'obrazky/ovoce.jpg',
-    answers: ['Kokos','Melounek','Jahoda','Ani jedna z moznosti'],
+    answers: ['Kokos','Melounek','Jahoda','Ani jedna z možností'],
     index: 1
 };
 
 thirdQuestion = {
-    question: 'Pro uspesne absolvovani kurzu je potreba... ',
+    question: 'Pro úspěšné absolvování kurzu je potřeba...',
     picture: 'obrazky/pivo.jpg',
-    answers: ['Umet JavaScript','Chodit po kurzu do hospody'],
+    answers: ['Umět JavaScript','Chodit po kurzu do hospody'],
     index: 0
 };
 
 pole = [firstQuestion,secondQuestion,thirdQuestion];
 
 x = -1;
+y = -1;
 
-function prvniStranka(){
+function pageContent(){
     x = x + 1;
     
     let page = document.createElement('div');
@@ -43,7 +44,7 @@ function prvniStranka(){
     page.appendChild(questionCount);
 
     questionInformation = document.createElement('h2');
-    questionInformation.innerHTML = 'Otazka ' + (x + 1) + ' / ' + '3';
+    questionInformation.innerHTML = 'Otázka ' + (x + 1) + ' / ' + '3';
     questionCount.appendChild(questionInformation);
 
     let question = document.createElement('div');
@@ -80,16 +81,46 @@ function prvniStranka(){
         innerQuestion.innerHTML = pole[x].answers[i];
         listItems.appendChild(innerQuestion);
     }
+
+}
+
+function  removeContent(){
+    let parent = document.querySelector('body');
+    let child  = document.querySelector('.kviz');
+    parent.removeChild(child);
+
+   if ((x+1) === pole.length){
+       let body = document.querySelector('body');
+       let lastPage = document.createElement('div');
+       lastPage.className = 'vysledek';
+       body.appendChild(lastPage);
+       document.querySelector('.vysledek').style.display = 'block';
+       let header = document.createElement('h2');
+       header.innerHTML = 'Tvoje hodnocení';
+       lastPage.appendChild(header);
+
+
+       for (let b = 0; b < pole.length;b++){
+           y = y + 1;
+           let questions = document.createElement('h3');
+           let yourAnswer = document.createElement('span');
+           questions.innerHTML = b + 1  + '. ' + pole[y].question;
+           yourAnswer.innerHTML = 'Tvoje odpověď: ';
+           lastPage.appendChild(questions);
+           lastPage.appendChild(yourAnswer);
+       }
+       
+
+   }else{
+    pageContent();
+
+   }
+   
 }
 
 
-function  odstran(){
-    let rodic = document.querySelector('body');
-    let potomek1 = document.querySelector('.kviz');
-   rodic.removeChild(potomek1);
-   prvniStranka();
-
-}
 
 // je potreba zajistit:
-// posledni stranku s vyhodnocenim vysledku
+// na posledni strance vyresit odchyceni, ktera odpoved byla vybrana 
+// porovnat ji se spravnou odpovedi 
+// vypocitat uspesnost
