@@ -27,7 +27,7 @@ thirdQuestion = {
 
 pole = [firstQuestion,secondQuestion,thirdQuestion];
 
-seznam = [];
+collectedItems = [];
 
 x = -1;
 y = -1;
@@ -93,14 +93,14 @@ function pageContent(){
 
 
     for (let i = 0; i < answersList.length; i++){
-    clickedAnswers.push(answersList[i].innerHTML);
+    clickedAnswers.push(answersList[i]);
 
 }
 
     for (let i = 0; i< answersList.length; i++){
     answersList[i].onclick = function(){
-        answerIndex = clickedAnswers.indexOf(this.innerHTML);
-        seznam.push(answerIndex);
+        answerIndex = clickedAnswers.indexOf(this);
+        collectedItems.push(answerIndex);
     }
 }
 }
@@ -112,6 +112,7 @@ function  moveContent(){
     let parent = document.querySelector('body');
     let child  = document.querySelector('.kviz');
     parent.removeChild(child);
+    
 
    if ((x+1) === pole.length){
        let body = document.querySelector('body');
@@ -127,14 +128,14 @@ function  moveContent(){
        for (let b = 0; b < pole.length;b++){
            y = y + 1;
            let questions = document.createElement('h3');
-           let yourAnswer = document.createElement('span');
+           let yourAnswer = document.createElement('p');
            questions.innerHTML = b + 1  + '. ' + pole[y].question;
-           yourAnswer.innerHTML = 'Tvoje odpověď: '+ pole[y].answers[seznam[b]];
+           yourAnswer.innerHTML = 'Tvoje odpověď: '+ pole[y].answers[collectedItems[b]];
            lastPage.appendChild(questions);
            lastPage.appendChild(yourAnswer);
            let correctAnswer = document.createElement('p');
 
-           if (pole[y].index === seznam[b]){
+           if (pole[y].index === collectedItems[b]){
                correctAnswer.innerHTML = 'To je SPRÁVNĚ';
                counter ++;
            } else {
@@ -146,8 +147,7 @@ function  moveContent(){
 
        let footer = document.createElement('h2');
        footer.innerHTML = 'Správně ' + counter + ' ze ' + pole.length + ' otázek. Úspěšnost '  +  Math.round((counter / pole.length) * 100) + ' %.';
-       lastPage.appendChild(footer); 
-       
+       lastPage.appendChild(footer);
 
    }else{
     pageContent();
@@ -157,9 +157,7 @@ function  moveContent(){
 }
 
 
+// V pripade dostatku casu a energie:
 
-// je potreba zajistit:
-// na posledni strance vyresit odchyceni, ktera odpoved byla vybrana 
-// porovnat ji se spravnou odpovedi 
-// vypocitat uspesnost
-// vse vyse uvedene zobrazit na posledni strance
+// pokusit se predelat zachyceni vybrane odpovedi pomomoci data-atributu - polozky seznamu
+/// pokusit se pouzit eventListenery misto eventu pridanych na HTML elementy 
