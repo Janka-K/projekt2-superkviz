@@ -27,6 +27,8 @@ thirdQuestion = {
 
 pole = [firstQuestion,secondQuestion,thirdQuestion];
 
+seznam = [];
+
 x = -1;
 y = -1;
 
@@ -82,9 +84,31 @@ function pageContent(){
         listItems.appendChild(innerQuestion);
     }
 
+    // cast,ktera zjistuje na jakou odpoved bylo kliknuto 
+
+    let answersList = document.querySelectorAll("#odpovedi li");
+    let clickedAnswers = [];
+    let answerIndex;
+    
+
+
+    for (let i = 0; i < answersList.length; i++){
+    clickedAnswers.push(answersList[i].innerHTML);
+
 }
 
-function  removeContent(){
+    for (let i = 0; i< answersList.length; i++){
+    answersList[i].onclick = function(){
+        answerIndex = clickedAnswers.indexOf(this.innerHTML);
+        seznam.push(answerIndex);
+    }
+}
+}
+
+counter = 0;
+
+function  moveContent(){
+
     let parent = document.querySelector('body');
     let child  = document.querySelector('.kviz');
     parent.removeChild(child);
@@ -105,10 +129,24 @@ function  removeContent(){
            let questions = document.createElement('h3');
            let yourAnswer = document.createElement('span');
            questions.innerHTML = b + 1  + '. ' + pole[y].question;
-           yourAnswer.innerHTML = 'Tvoje odpověď: ';
+           yourAnswer.innerHTML = 'Tvoje odpověď: '+ pole[y].answers[seznam[b]];
            lastPage.appendChild(questions);
            lastPage.appendChild(yourAnswer);
+           let correctAnswer = document.createElement('p');
+
+           if (pole[y].index === seznam[b]){
+               correctAnswer.innerHTML = 'To je SPRÁVNĚ';
+               counter ++;
+           } else {
+               correctAnswer.innerHTML = 'Správná odpověď: ' + pole[y].answers[pole[y].index];
+               
+           }
+           lastPage.appendChild(correctAnswer);
        }
+
+       let footer = document.createElement('h2');
+       footer.innerHTML = 'Správně ' + counter + ' ze ' + pole.length + ' otázek. Úspěšnost '  +  Math.round((counter / pole.length) * 100) + ' %.';
+       lastPage.appendChild(footer); 
        
 
    }else{
@@ -124,3 +162,4 @@ function  removeContent(){
 // na posledni strance vyresit odchyceni, ktera odpoved byla vybrana 
 // porovnat ji se spravnou odpovedi 
 // vypocitat uspesnost
+// vse vyse uvedene zobrazit na posledni strance
