@@ -27,7 +27,6 @@ thirdQuestion = {
 
 pole = [firstQuestion,secondQuestion,thirdQuestion];
 
-let collectedItems = [];
 let clickedAnswers = [];
 counter = 0;
 
@@ -100,7 +99,7 @@ function pageContent(){
     
     for (let i = 0; i< answersList.length; i++){
         answersList[i].addEventListener('click',function(){
-            clickedAnswers.push(data[i]);
+            clickedAnswers.push(Number(data[i]));
             moveContent();
     })
     
