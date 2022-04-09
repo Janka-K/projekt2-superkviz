@@ -161,11 +161,3 @@ function  moveContent(){
    }
    
 }
-
-//***HRUBA CHYBA -- JE POTREBA PREDELAT LOGIKU - NYNI JE MOZNE KLIKNOUT NA BODY */
-
-
-// V pripade dostatku casu a energie:
-
-// pokusit se predelat zachyceni vybrane odpovedi pomomoci data-atributu - polozky seznamu
-/// pokusit se pouzit eventListenery misto eventu pridanych na HTML elementy 
