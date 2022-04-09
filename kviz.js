@@ -86,19 +86,21 @@ function pageContent(){
     for(let i = 0; i < pole[x].answers.length; i++){
         let innerQuestion = document.createElement('li');
         innerQuestion.innerHTML = pole[x].answers[i];
+        innerQuestion.dataset.odpoved = i;
         listItems.appendChild(innerQuestion);
-
-
     }
 
 
     let answersList = document.querySelectorAll("#odpovedi li");
-    
-    
+    let data = Array.from(answersList, answer => answer.dataset.odpoved);
 
+  
+
+    
+    
     for (let i = 0; i< answersList.length; i++){
         answersList[i].addEventListener('click',function(){
-            clickedAnswers.push(answersList[i].innerHTML);
+            clickedAnswers.push(data[i]);
             moveContent();
     })
     
@@ -146,7 +148,7 @@ function  moveContent(){
        }
 
        let footer = document.createElement('h2');
-       footer.innerHTML = 'Správně ' + counter + ' ze ' + pole.length + ' otázek. Úspěšnost '  +  Math.trunc(counter / pole.length * 100) + ' %.';
+       footer.innerHTML = 'Správně ' + counter + ' ze ' + pole.length + ' otázek. Úspěšnost '  +  Math.round(counter / pole.length * 100) + ' %.';
        lastPage.appendChild(footer);
 
    }else{
@@ -155,3 +157,4 @@ function  moveContent(){
    }
    
 }
+
