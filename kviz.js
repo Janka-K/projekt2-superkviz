@@ -27,7 +27,7 @@ thirdQuestion = {
 
 pole = [firstQuestion,secondQuestion,thirdQuestion];
 
-collectedItems = [];
+let collectedItems = [];
 let clickedAnswers = [];
 counter = 0;
 
@@ -93,7 +93,7 @@ function pageContent(){
 
 
     let answersList = document.querySelectorAll("#odpovedi li");
-    let answerIndex;
+    
     
 
     for (let i = 0; i< answersList.length; i++){
