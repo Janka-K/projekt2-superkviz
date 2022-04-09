@@ -78,7 +78,7 @@ function pageContent(){
     let listItems = document.createElement('ul');
     listItems.id = 'odpovedi';
     list.appendChild(listItems);
-    /*listItems.onclick = moveContent;*/
+
 
 
     for(let i = 0; i < pole[x].answers.length; i++){
