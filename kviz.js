@@ -28,9 +28,14 @@ thirdQuestion = {
 pole = [firstQuestion,secondQuestion,thirdQuestion];
 
 collectedItems = [];
+let clickedAnswers = [];
+counter = 0;
 
 x = -1;
 y = -1;
+
+document.querySelector('body').addEventListener('load',pageContent());
+
 
 function pageContent(){
     x = x + 1;
@@ -46,7 +51,7 @@ function pageContent(){
     page.appendChild(questionCount);
 
     questionInformation = document.createElement('h2');
-    questionInformation.innerHTML = 'Otázka ' + (x + 1) + ' / ' + '3';
+    questionInformation.innerHTML = 'Otázka ' + (x + 1) + ' / ' + pole.length;
     questionCount.appendChild(questionInformation);
 
     let question = document.createElement('div');
@@ -82,30 +87,25 @@ function pageContent(){
         let innerQuestion = document.createElement('li');
         innerQuestion.innerHTML = pole[x].answers[i];
         listItems.appendChild(innerQuestion);
+
+
     }
 
-    // cast,ktera zjistuje na jakou odpoved bylo kliknuto 
 
     let answersList = document.querySelectorAll("#odpovedi li");
-    let clickedAnswers = [];
     let answerIndex;
     
 
-
-    for (let i = 0; i < answersList.length; i++){
-    clickedAnswers.push(answersList[i]);
-
-}
-
     for (let i = 0; i< answersList.length; i++){
-    answersList[i].onclick = function(){
-        answerIndex = clickedAnswers.indexOf(this);
-        collectedItems.push(answerIndex);
-    }
+        answersList[i].addEventListener('click',function(){
+            clickedAnswers.push(answersList[i].innerHTML);
+            moveContent();
+    })
+    
+    
 }
 }
 
-counter = 0;
 
 function  moveContent(){
 
@@ -130,12 +130,12 @@ function  moveContent(){
            let questions = document.createElement('h3');
            let yourAnswer = document.createElement('p');
            questions.innerHTML = b + 1  + '. ' + pole[y].question;
-           yourAnswer.innerHTML = 'Tvoje odpověď: '+ pole[y].answers[collectedItems[b]];
+           yourAnswer.innerHTML = 'Tvoje odpoved: ' + clickedAnswers[b];
            lastPage.appendChild(questions);
            lastPage.appendChild(yourAnswer);
            let correctAnswer = document.createElement('p');
 
-           if (pole[y].index === collectedItems[b]){
+           if (pole[y].answers[pole[y].index] === clickedAnswers[b]){
                correctAnswer.innerHTML = 'To je SPRÁVNĚ';
                counter ++;
            } else {
@@ -146,7 +146,7 @@ function  moveContent(){
        }
 
        let footer = document.createElement('h2');
-       footer.innerHTML = 'Správně ' + counter + ' ze ' + pole.length + ' otázek. Úspěšnost '  +  Math.round((counter / pole.length) * 100) + ' %.';
+       footer.innerHTML = 'Správně ' + counter + ' ze ' + pole.length + ' otázek. Úspěšnost '  +  Math.trunc(counter / pole.length * 100) + ' %.';
        lastPage.appendChild(footer);
 
    }else{
@@ -155,9 +155,3 @@ function  moveContent(){
    }
    
 }
-
-
-// V pripade dostatku casu a energie:
-
-// pokusit se predelat zachyceni vybrane odpovedi pomomoci data-atributu - polozky seznamu
-/// pokusit se pouzit eventListenery misto eventu pridanych na HTML elementy 
