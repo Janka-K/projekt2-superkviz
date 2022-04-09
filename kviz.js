@@ -27,7 +27,6 @@ thirdQuestion = {
 
 pole = [firstQuestion,secondQuestion,thirdQuestion];
 
-let collectedItems = [];
 let clickedAnswers = [];
 counter = 0;
 
@@ -107,7 +106,7 @@ function pageContent(){
 }
 
 
-function  moveContent(){
+function moveContent(){
 
     let parent = document.querySelector('body');
     let child  = document.querySelector('.kviz');
