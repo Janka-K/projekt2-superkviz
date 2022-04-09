@@ -137,7 +137,7 @@ function  moveContent(){
            lastPage.appendChild(yourAnswer);
            let correctAnswer = document.createElement('p');
 
-           if (pole[y].answers[pole[y].index] === clickedAnswers[b]){
+           if (pole[y].index === clickedAnswers[b]){
                correctAnswer.innerHTML = 'To je SPRÁVNĚ';
                counter ++;
            } else {
