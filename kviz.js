@@ -28,9 +28,11 @@ thirdQuestion = {
 pole = [firstQuestion,secondQuestion,thirdQuestion];
 
 collectedItems = [];
+counter = 0;
 
 x = -1;
 y = -1;
+
 
 function pageContent(){
     x = x + 1;
@@ -46,7 +48,7 @@ function pageContent(){
     page.appendChild(questionCount);
 
     questionInformation = document.createElement('h2');
-    questionInformation.innerHTML = 'Otázka ' + (x + 1) + ' / ' + '3';
+    questionInformation.innerHTML = 'Otázka ' + (x + 1) + ' / ' + pole.length;
     questionCount.appendChild(questionInformation);
 
     let question = document.createElement('div');
@@ -76,12 +78,14 @@ function pageContent(){
     let listItems = document.createElement('ul');
     listItems.id = 'odpovedi';
     list.appendChild(listItems);
+    /*listItems.onclick = moveContent;*/
 
 
     for(let i = 0; i < pole[x].answers.length; i++){
         let innerQuestion = document.createElement('li');
         innerQuestion.innerHTML = pole[x].answers[i];
         listItems.appendChild(innerQuestion);
+
     }
 
     // cast,ktera zjistuje na jakou odpoved bylo kliknuto 
@@ -101,11 +105,13 @@ function pageContent(){
     answersList[i].onclick = function(){
         answerIndex = clickedAnswers.indexOf(this);
         collectedItems.push(answerIndex);
+        moveContent();
     }
 }
 }
 
-counter = 0;
+
+
 
 function  moveContent(){
 
@@ -146,7 +152,7 @@ function  moveContent(){
        }
 
        let footer = document.createElement('h2');
-       footer.innerHTML = 'Správně ' + counter + ' ze ' + pole.length + ' otázek. Úspěšnost '  +  Math.round((counter / pole.length) * 100) + ' %.';
+       footer.innerHTML = 'Správně ' + counter + ' ze ' + pole.length + ' otázek. Úspěšnost '  +  Math.trunc(counter / pole.length * 100) + ' %.';
        lastPage.appendChild(footer);
 
    }else{
@@ -155,6 +161,8 @@ function  moveContent(){
    }
    
 }
+
+//***HRUBA CHYBA -- JE POTREBA PREDELAT LOGIKU - NYNI JE MOZNE KLIKNOUT NA BODY */
 
 
 // V pripade dostatku casu a energie:
