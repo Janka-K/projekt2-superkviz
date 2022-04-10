@@ -129,7 +129,7 @@ function moveContent(){
            let questions = document.createElement('h3');
            let yourAnswer = document.createElement('p');
            questions.innerHTML = b + 1  + '. ' + pole[y].question;
-           yourAnswer.innerHTML = 'Tvoje odpoved: ' + clickedAnswers[b];
+           yourAnswer.innerHTML = 'Tvoje odpoveď: ' + clickedAnswers[b];
            lastPage.appendChild(questions);
            lastPage.appendChild(yourAnswer);
            let correctAnswer = document.createElement('p');
