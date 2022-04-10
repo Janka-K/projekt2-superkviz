@@ -152,7 +152,7 @@ function  moveContent(){
        }
 
        let footer = document.createElement('h2');
-       footer.innerHTML = 'Správně ' + counter + ' ze ' + pole.length + ' otázek. Úspěšnost '  +  Math.trunc(counter / pole.length * 100) + ' %.';
+       footer.innerHTML = 'Správně ' + counter + ' ze ' + pole.length + ' otázek. Úspěšnost '  +  Math.round(counter / pole.length * 100) + ' %.';
        lastPage.appendChild(footer);
 
    }else{
