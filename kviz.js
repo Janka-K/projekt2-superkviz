@@ -86,14 +86,14 @@ function pageContent(){
     for(let i = 0; i < pole[x].answers.length; i++){
         let innerQuestion = document.createElement('li');
         innerQuestion.innerHTML = pole[x].answers[i];
-        innerQuestion.dataset.odpoved = i;
+        innerQuestion.dataset.item = i;
         listItems.appendChild(innerQuestion);
 
     }
 
 
     let answersList = document.querySelectorAll("#odpovedi li");
-    let data = Array.from(answersList, answer => answer.dataset.odpoved);
+    let data = Array.from(answersList, answer => answer.dataset.item);
 
   
 
