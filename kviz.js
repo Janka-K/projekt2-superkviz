@@ -4,28 +4,28 @@
 // * obrazek k otazce
 // * pole moznych odpovedi - a index spravne odpovedi
 
-firstQuestion = {
+let firstQuestion = {
   question: "Co je ikonická hračka z 80.let?",
   picture: "obrazky/moncicak.jpg",
   answers: ["Kočičák", "Mončičák", "Opičák"],
   index: 1,
 };
 
-secondQuestion = {
+let secondQuestion = {
   question: "Jaké je Matějovo nejoblíbenější ovoce?",
   picture: "obrazky/ovoce.jpg",
   answers: ["Kokos", "Melounek", "Jahoda", "Ani jedna z možností"],
   index: 1,
 };
 
-thirdQuestion = {
+let thirdQuestion = {
   question: "Pro úspěšné absolvování kurzu je potřeba...",
   picture: "obrazky/pivo.jpg",
   answers: ["Umět JavaScript", "Chodit po kurzu do hospody"],
   index: 0,
 };
 
-pole = [firstQuestion, secondQuestion, thirdQuestion];
+let pole = [firstQuestion, secondQuestion, thirdQuestion];
 
 let clickedAnswers = [];
 counter = 0;
@@ -48,7 +48,7 @@ function pageContent() {
   questionCount.id = "poradi";
   page.appendChild(questionCount);
 
-  questionInformation = document.createElement("h2");
+  let questionInformation = document.createElement("h2");
   questionInformation.innerHTML = "Otázka " + (x + 1) + " / " + pole.length;
   questionCount.appendChild(questionInformation);
 
@@ -63,14 +63,15 @@ function pageContent() {
   let content = document.createElement("div");
   content.className = "obsah";
   page.appendChild(content);
-  let fotka = document.createElement("div");
-  fotka.className = "foto";
-  content.appendChild(fotka);
+
+  let photo = document.createElement("div");
+  photo.className = "foto";
+  content.appendChild(photo);
 
   let picture = document.createElement("img");
   picture.id = "obrazek";
   picture.src = pole[x].picture;
-  fotka.appendChild(picture);
+  photo.appendChild(picture);
 
   let list = document.createElement("div");
   list.id = "moznosti";
